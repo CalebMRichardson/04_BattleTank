@@ -19,6 +19,13 @@ public:
 
 	virtual void BeginPlay() override; 
 	
+	virtual void Tick(float DeltaTime) override;
+
 private:
 	ATank* GetControlledTank() const;
+
+	// Start Tank moving the barrel towards crosshair world space
+	void AimTowardsCrosshair();
+
+	bool GetSightRayHitLocation(FVector &OutHitLocation) const;
 };
