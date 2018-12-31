@@ -1,6 +1,6 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankPlayerController.h"
+#include "Tank.h"
 
 void ATankPlayerController::BeginPlay() {
 	Super::BeginPlay();
@@ -18,7 +18,6 @@ void ATankPlayerController::BeginPlay() {
 
 void ATankPlayerController::Tick(float DeltaTime) {
 	Super::Tick(DeltaTime);
-
 	AimTowardsCrosshair();
 }
 
@@ -40,7 +39,7 @@ void ATankPlayerController::AimTowardsCrosshair() {
 }
 
 // Get world location of LineTrace through crosshair, true if it hits landscape
-bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) const {
+bool ATankPlayerController::GetSightRayHitLocation(FVector &HitLocation) const {
 
 	// Find the crosshair position in pixel coordinates
 	int32 ViewportSizeX, ViewportSizeY; 
@@ -48,17 +47,11 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) cons
 	auto ScreenLocation = FVector2D(ViewportSizeX * CrossHairXLocation, ViewportSizeY * CrossHairYLocation);
 
 	FVector LookDirection; 
-	FVector HitLocation;
 
 	if (GetLookDirection(ScreenLocation, LookDirection)) {
-		//UE_LOG(LogTemp, Warning, TEXT("Look Direction: %s"), *LookDirection.ToString()); 
 		GetLookVectorHitLocation(LookDirection, HitLocation);
-		UE_LOG(LogTemp, Warning, TEXT("Hit Location: %s"), *HitLocation.ToString());
 	}
 
-	// "Deproject" the screen position of the crosshair to a world direction
-	// Line-Trace along that look direction, and see what we hit ( up to a max range )
-	
 	return true;
 }
 
