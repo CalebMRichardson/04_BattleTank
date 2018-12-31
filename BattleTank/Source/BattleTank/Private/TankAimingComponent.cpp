@@ -1,4 +1,5 @@
 #include "TankAimingComponent.h"
+#include "TankBarrel.h"
 
 UTankAimingComponent::UTankAimingComponent()
 {
@@ -26,7 +27,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) {
 	}
 }
 
-void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent* BarrelToSet) {
+void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet) {
 	Barrel = BarrelToSet;
 }
 
@@ -36,8 +37,6 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
 	auto AimAsARotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsARotator - BarrelRotator;
 	UE_LOG(LogTemp, Warning, TEXT("AimAsRotator: %s"), *DeltaRotator.ToString());
+	Barrel->Elevate(5); // TODO change magic numbers
 
-	// Move The barrel the right amount this time
-
-	// Given a max elevation speed, and the frame time
 }
