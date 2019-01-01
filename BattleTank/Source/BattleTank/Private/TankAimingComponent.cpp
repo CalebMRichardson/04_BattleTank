@@ -33,7 +33,6 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) {
 	if (bHaveAimSolution) {
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
 		MoveBarrelTowards(AimDirection);
-		//UE_LOG(LogTemp, Warning, TEXT("Aim solve found: %s"), *AimDirection.ToString());
 	} else {
 		UE_LOG(LogTemp, Warning, TEXT("No aim solve found."));
 	}
@@ -47,7 +46,6 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
 	auto DeltaRotator = AimAsARotator - BarrelRotator;
 	
 	if (!Turret) { 
-		UE_LOG(LogTemp, Error, TEXT("PLEASE REMAIN CALM."));
 		return;  
 	}
 	if (!Barrel) { return; }
