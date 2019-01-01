@@ -17,6 +17,8 @@ void ATankAIController::Tick(float DeltaTime) {
 		
 		ControlledTank->AimAt(PlayerTank->GetActorLocation());
 		
-		ControlledTank->Fire();
+
+		//TODO Remove to re-enable AI Tank Firing
+		//ControlledTank->Fire();
 	}
 }
